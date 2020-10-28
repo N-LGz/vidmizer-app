@@ -1,0 +1,34 @@
+<h1 mat-dialog-title><strong>{{action}}</strong></h1>
+
+<div mat-dialog-content>
+
+  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Lastname" matInput [(ngModel)]="local_data.lname" required>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="action != 'Delete'">
+    <input placeholder="{{action}} Firstname" matInput [(ngModel)]="local_data.fname" required>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="action != 'Delete'">
+    <input placeholder="{{action}} Phone" matInput [(ngModel)]="local_data.phone" required>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="action != 'Delete'">
+    <mat-select placeholder="{{action}} Address" [(ngModel)]="local_data.address" required>
+        <mat-option *ngFor="let res of data" [value]="res.nom">
+          {{ res.nom }} 
+        </mat-option>
+    </mat-select>
+  </mat-form-field> 
+
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.lname}}</b>?
+  </ng-template>
+
+</div>
+
+<div mat-dialog-actions>
+  <button type="submit" mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
